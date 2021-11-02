@@ -33,7 +33,7 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/eureka-discovery
+          tags: ${{ secrets.DOCKER_USERNAME }}/eureka-discovery:latest
         
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
