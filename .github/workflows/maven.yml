@@ -51,8 +51,7 @@ jobs:
             username: ${{ secrets.SERVER_USERNAME }}
             password: ${{ secrets.SERVER_PASSWORD }}
             script: |
-              docker login --username=${{ secrets.DOCKER_USERNAME }} --password=${{ secrets.DOCKER_PASSWORD }}
-              docker pull ${{ secrets.DOCKER_USERNAME }}/eureka-discovery:latest
-              docker run -d -p 9003:9003 --restart=always --name kafkaproducer -e port=9003 -e bootstrap-address=${{ secrets.BOOTSTRAP_ADDRESS }}:39092 ${{ secrets.DOCKER_USERNAME }}/eureka-discovery:latest
+              docker pull ujwalgautam/eureka-discovery
+              docker run -d -p 9003:9003 --restart=always --name kafkaproducer -e port=9003 -e bootstrap-address=${{ secrets.BOOTSTRAP_ADDRESS }}:39092 ujwalgautam/eureka-discovery
               docker system prune -f
               echo "Done..."
