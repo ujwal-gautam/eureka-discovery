@@ -49,10 +49,10 @@ jobs:
           with: # We set all our secrets here for the action, these won't be shown in the action logs
             host: ${{ secrets.HOST }}
             username: ${{ secrets.SERVER_USERNAME }}
-            password: ${{ secrets.SERVER_PASSWORD }}
+            key: ${{ secrets.SERVER_PASSWORD }}
             script: |
-              docker login --username=${{ secrets.DOCKER_USERNAME }} --password=${{ secrets.DOCKER_PASSWORD }}
-              docker pull ${{ secrets.DOCKER_USERNAME }}/eureka-discovery:latest
-              docker run -d -p 9003:9003 --restart=always --name kafkaproducer -e port=9003 -e bootstrap-address=${{ secrets.BOOTSTRAP_ADDRESS }}:39092 ${{ secrets.DOCKER_USERNAME }}/eureka-discovery:latest
-              docker system prune -f
+              sudo docker pull ujwalgautam/eureka-discovery
+              sudo docker rm -f kafkaproducer
+              sudo docker run -d -p 9003:9003 --restart=always --name kafkaproducer -e port=9003 -e bootstrap-address=${{ secrets.BOOTSTRAP_ADDRESS }}:39092 ujwalgautam/eureka-discovery
+              sudo docker system prune -f
               echo "Done..."
